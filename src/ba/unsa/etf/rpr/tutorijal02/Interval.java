@@ -43,6 +43,7 @@ public class Interval {
 
         return false;
     }
+
     public Interval intersect(Interval interval) {
         Interval presjek = new Interval();
         if (interval.pocetnaTacka >= this.pocetnaTacka) {
@@ -70,7 +71,38 @@ public class Interval {
         return interval1.intersect(interval2);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Interval interval = (Interval) o;
+        return Double.compare(interval.pocetnaTacka, pocetnaTacka) == 0 &&
+                Double.compare(interval.krajnjaTacka, krajnjaTacka) == 0 &&
+                pripadaPocetna == interval.pripadaPocetna &&
+                pripadaKrajnja == interval.pripadaKrajnja;
+    }
 
+    @Override
+    public String toString() {
+        String s = "";
+
+        if (this.equals(new Interval())) return "()";
+
+        if (this.pripadaPocetna && this.pripadaKrajnja) {
+            s = "[" + this.pocetnaTacka + "," + this.krajnjaTacka + "]";
+        }
+        if (this.pripadaPocetna && !this.pripadaKrajnja) {
+            s = "[" + this.pocetnaTacka + "," + this.krajnjaTacka + ")";
+        }
+        if (!this.pripadaPocetna && !this.pripadaKrajnja) {
+            s = "(" + this.pocetnaTacka + "," + this.krajnjaTacka + ")";
+        }
+        if (!this.pripadaPocetna && this.pripadaKrajnja) {
+            s = "(" + this.pocetnaTacka + "," + this.krajnjaTacka + "]";
+        }
+
+        return s;
+    }
 
 
 }

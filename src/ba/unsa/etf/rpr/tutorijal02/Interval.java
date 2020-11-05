@@ -43,6 +43,34 @@ public class Interval {
 
         return false;
     }
+    public Interval intersect(Interval interval) {
+        Interval presjek = new Interval();
+        if (interval.pocetnaTacka >= this.pocetnaTacka) {
+            presjek.pocetnaTacka = interval.pocetnaTacka;
+            presjek.pripadaPocetna = interval.pripadaPocetna;
+        }
+        if (interval.pocetnaTacka <= this.pocetnaTacka) {
+            presjek.pocetnaTacka = this.pocetnaTacka;
+            presjek.pripadaPocetna = this.pripadaPocetna;
+        }
+        if (interval.krajnjaTacka >= this.krajnjaTacka) {
+            presjek.krajnjaTacka = this.krajnjaTacka;
+            presjek.pripadaKrajnja = this.pripadaKrajnja;
+        }
+        if (interval.krajnjaTacka <= this.krajnjaTacka) {
+            presjek.krajnjaTacka = interval.krajnjaTacka;
+            presjek.pripadaKrajnja = interval.pripadaKrajnja;
+
+        }
+
+        return presjek;
+    }
+
+    public static Interval intersect(Interval interval1, Interval interval2) {
+        return interval1.intersect(interval2);
+    }
+
+
 
 
 }
